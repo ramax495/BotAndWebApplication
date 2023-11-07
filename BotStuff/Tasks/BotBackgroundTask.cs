@@ -1,13 +1,17 @@
-﻿using TelegramBotBase;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+using TelegramBotBase;
 using TelegramBotBase.Builder;
 
 namespace BotAndWebApplication.BotStuff.Tasks
 {
     public class BotBackgroundTask : IHostedService
     {
-        BotBackgroundTask(IServiceProvider serviceProvider)
+        public BotBackgroundTask(IServiceCollection services)
         {
             // t.me/BotAndWebApplicationTestBot
+            
+            var serviceProvider = services.BuildServiceProvider();
 
             BotBaseInstance = BotBaseBuilder.Create()
                                 .WithAPIKey("6966935614:AAHoXDM1Rj_voraeGT4saf_uBF-3xeB2ZtE")
@@ -20,10 +24,12 @@ namespace BotAndWebApplication.BotStuff.Tasks
                                 .Build();
         }
 
-        public BotBackgroundTask(IServiceProvider serviceProvider, ILogger<BotBackgroundTask> logger) : this(serviceProvider)
+        /*
+        public BotBackgroundTask(IServiceCollection services, ILogger<BotBackgroundTask> logger) : this(services)
         {
             Logger = logger;
         }
+        */
 
         public ILogger<BotBackgroundTask>? Logger { get; }
 

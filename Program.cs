@@ -15,7 +15,7 @@ internal class Program
         builder.Services
             .AddDbContext<BotDbContext>(x => x.UseInMemoryDatabase("TelegramBotBase"));
 
-        builder.Services.AddHostedService<BotBackgroundTask>();
+        builder.Services.AddHostedService<BotBackgroundTask>(_ => new BotBackgroundTask(builder.Services));
 
         var app = builder.Build();
 

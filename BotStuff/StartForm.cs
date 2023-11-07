@@ -22,6 +22,10 @@ namespace BotAndWebApplication.BotStuff
 
         private async Task StartForm_Opened(object sender, EventArgs e)
         {
+            var user = await _dbContext.Users.FindAsync(Device.DeviceId);
+            if (user == null)
+                await Device.Send("You are mew user !");
+
             await Device.Send("Welcome to StartForm !");
 
             var form = new ButtonForm();
